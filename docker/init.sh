@@ -24,6 +24,9 @@ bench set-redis-socketio-host redis://redis:6379
 sed -i '/redis/d' ./Procfile
 sed -i '/watch/d' ./Procfile
 
+# Bind web server to 0.0.0.0 so the Docker port mapping (8000:8000) can reach it
+sed -i 's/^web: bench serve --port 8000$/web: bench serve --host 0.0.0.0 --port 8000/' ./Procfile
+
 bench get-app erpnext
 bench get-app hrms
 
